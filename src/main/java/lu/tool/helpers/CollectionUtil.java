@@ -47,4 +47,14 @@ public class CollectionUtil {
             throw new Exception("Error while getting the object property.", e);
         }
     }
+
+    @SuppressWarnings("unchecked")
+    public static <T> Collection<T> unique(Collection<T> c, Collection<T> result) {
+        if (c == null) {
+            return result;
+        }
+        Set<T> s = new LinkedHashSet<T>(c);
+        result.addAll(s);
+        return result;
+    }
 }
