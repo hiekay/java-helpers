@@ -16,7 +16,7 @@
 /*
 [1, 2]
 */
-CollectionUtils.pluck
+CollectionUtils.pluck(persons, "id", new ArrayList<Integer>())
 
 /*
 {
@@ -29,10 +29,10 @@ CollectionUtils.pluck
     ]
 }
 */
-CollectionUtils.groupBy
+CollectionUtils.groupBy(persons, "gender", Integer.class)
 
 /*
 去重
 */
-CollectionUtils.groupBy
+CollectionUtils.unique(integers, new ArrayList<Integer>())
 ```
