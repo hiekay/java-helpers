@@ -7,7 +7,7 @@ import java.util.*;
 /**
  * Created by xiaozi on 1/6/15.
  */
-public class CollectionUtil {
+public class CollectionUtils {
     @SuppressWarnings("unchecked")
     public static <T>Collection<T> pluck(Collection<?> c, String propName, Collection<T> result) {
         if (c == null) {

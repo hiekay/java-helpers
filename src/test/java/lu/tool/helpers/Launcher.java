@@ -17,17 +17,17 @@ public class Launcher {
             person.setAge(i);
             persons.add(person);
         }
-        List<Integer> ages = (List<Integer>) CollectionUtil.pluck(persons, "age", new ArrayList<Integer>());
+        List<Integer> ages = (List<Integer>) CollectionUtils.pluck(persons, "age", new ArrayList<Integer>());
         System.out.println(ages);
         try {
-            Map<String, List<Person>> groupedPersons = CollectionUtil.groupBy(persons, "name", String.class);
+            Map<String, List<Person>> groupedPersons = CollectionUtils.groupBy(persons, "name", String.class);
             System.out.println(groupedPersons);
         } catch (Exception e) {
             e.printStackTrace();
         }
 
         List<String> ids = Arrays.asList("ni", "ni", "mei", "mei");
-        List<String> uniquedIds = (List<String>) CollectionUtil.unique(ids, new ArrayList<String>());
+        List<String> uniquedIds = (List<String>) CollectionUtils.unique(ids, new ArrayList<String>());
         System.out.println(uniquedIds);
 
         String a1 = "a";
