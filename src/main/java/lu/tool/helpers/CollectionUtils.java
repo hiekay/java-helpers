@@ -8,6 +8,15 @@ import java.util.*;
  * Created by xiaozi on 1/6/15.
  */
 public class CollectionUtils {
+
+    /**
+     * 取出collection中某一列的值
+     * @param c
+     * @param propName
+     * @param result
+     * @param <T>
+     * @return
+     */
     @SuppressWarnings("unchecked")
     public static <T>Collection<T> pluck(Collection<?> c, String propName, Collection<T> result) {
         if (c == null) {
@@ -25,6 +34,70 @@ public class CollectionUtils {
         return result;
     }
 
+    /**
+     * 取出collection中某一列的值，并以另一列的值作为键关联
+     * @param c
+     * @param propName
+     * @param keyName
+     * @param result
+     * @param <K>
+     * @param <V>
+     * @return
+     */
+    @SuppressWarnings("unchecked")
+    public static <K, V>Map<K, V> pluck(Collection<?> c, String keyName, String propName, Map<K, V> result) throws Exception {
+        if (c == null) {
+            return result;
+        }
+        try {
+            for (Iterator<?> it = c.iterator(); it.hasNext();) {
+                Object element = it.next();
+                K key = (K) PropertyUtils.getProperty(element, keyName);
+                V value = (V) PropertyUtils.getProperty(element, propName);
+                result.put(key, value);
+            }
+            return result;
+        } catch (Exception e) {
+            throw new Exception("Error while getting the object property.", e);
+        }
+    }
+
+    /**
+     * 使用collection中某一列的值关联collection
+     * @param c
+     * @param keyName
+     * @param <K>
+     * @param <T>
+     * @return
+     * @throws Exception
+     */
+    @SuppressWarnings("unchecked")
+    public static <K, T>Map <K, T> keyBy(List<T> c, String keyName, Class<K> clazz) throws Exception {
+        if (c == null) {
+            return new LinkedHashMap<K, T>();
+        }
+        try {
+            Map<K, T> keyed = new LinkedHashMap<K, T>();
+            for (Iterator<T> it = c.iterator(); it.hasNext(); ) {
+                T element = it.next();
+                K key = (K) PropertyUtils.getProperty(element, keyName);
+                keyed.put(key, element);
+            }
+            return keyed;
+        } catch (Exception e) {
+            throw new Exception("Error while getting the object property.", e);
+        }
+    }
+
+    /**
+     * 按照collection中某一列的值分组
+     * @param c
+     * @param propName
+     * @param <K>
+     * @param <T>
+     * @return
+     * @throws Exception
+     */
     @SuppressWarnings("unchecked")
     public static <K, T>Map <K, List<T>> groupBy(List<T> c, String propName, Class<K> clazz) throws Exception {
         if (c == null) {
@@ -48,6 +121,13 @@ public class CollectionUtils {
         }
     }
 
+    /**
+     * collection去重
+     * @param c
+     * @param result
+     * @param <T>
+     * @return
+     */
     @SuppressWarnings("unchecked")
     public static <T> Collection<T> unique(Collection<T> c, Collection<T> result) {
         if (c == null) {

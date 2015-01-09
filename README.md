@@ -14,9 +14,27 @@
 */
 
 /*
-[1, 2]
+[1, 2, 3]
 */
 CollectionUtils.pluck(persons, "id", new ArrayList<Integer>())
+
+/*
+{1: 1, 2: 1, 3: 2}
+*/
+CollectionUtils.pluck(persons, "id", "gender", new HashMap<Integer, Ingeger>())
+
+/*
+{
+    1: [
+        {id: 1, name: "name1", gender: 1},
+        {id: 2, name: "name2", gender: 1},
+    ],
+    2: [
+        {id: 3, name: "name1", gender: 2},
+    ]
+}
+*/
+CollectionUtils.keyBy(persons, "id", Integer.class)
 
 /*
 {
